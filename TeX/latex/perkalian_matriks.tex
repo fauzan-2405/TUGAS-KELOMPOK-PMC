@@ -276,11 +276,137 @@ yang dilakukan juga sama, yaitu dengan penambahan 1 per iterasi. Oleh karena itu
 variabel ini tidak mengubah output yang dihasilkan.
 
 \subsection{Perhitungan Kompleksitas waktu}
-duar apaan
+\subsubsection{Kompleksitas Waktu Algoritma Iterative}
+\paragraph*{
+    \emph{Kompleksitas dari algoritma iterative memiliki notasi kompleksitas Big O adalah O($n^{3}$). 
+    Hal tersebut dikarenakan terdapatnya 3 nested for loop, yang membuat notasi kompleksitas
+    bernilai O($n^{3}$).\\\\}
+}
+
+%iterative
+\begin{tikzpicture}
+    \begin{axis}[
+        title={Iterative algorithm time complexity},
+        xlabel=$n$,
+        ylabel={$Operations$}
+    ]
+    \addplot [
+        domain = 0:10,
+        samples = 100
+        ]{x^3};
+    \addlegendentry{$O(n^3)$}
+    \end{axis}
+\end{tikzpicture}
+
+\subsubsection{Kompleksitas Waktu Algoritma Rekursif}
+\paragraph*{
+    \emph{Kompleksitas dari algoritma rekursif memiliki notasi kompleksitas Big O adalah O($n^{3}$). 
+    Hal tersebut dikarenakan dipanggilnya fungsi rekursif sebanyak 8 kali, yang menyebabkan 
+    notasi bernilai O(n log 8), yang sama dengan O($n^{3}$).\\\\}
+}
+%rekursif
+
+\begin{tikzpicture}
+    \begin{axis}[
+        title={Recursive algorithm time complexity},
+        xlabel=$n$,
+        ylabel={$O(n)$}
+    ]
+    \addplot [
+        domain = 0:10,
+        samples = 100
+        ]{x^3};
+    \addlegendentry{$O(n^3)$}
+    \end{axis}
+\end{tikzpicture}
+%\caption{Grafik Algoritma Iterative}
+
+\subsubsection{Kompleksitas Waktu Algoritma Strassen}
+\paragraph*{
+    \emph{Kompleksitas dari algoritma Strassen memiliki notasi kompleksitas Big O bernilai O($n^{2.807}$). 
+    Hal tersebut dikarenakan, pada algoritma Strassen dipanggil fungsi rekursif sebanyak 7 kali, dibandingkan
+    algoritma yang lain yang memanggil fungsi rekursif sebanyak 8 kali. Hal ini membuat algoritma Strassen
+    memiliki time complexity yang lebih efisien (O($n^{2.807}$)) dibandingkan algoritma biasa (O($n^{3}$))\\\\}
+}
+%strassen
+\begin{tikzpicture}
+    \begin{axis}[
+        title={Strassen's algorithm time complexity},
+        xlabel=$n$,
+        ylabel={$O(n)$}
+    ]
+    \addplot [
+        domain = 0:10,
+        samples = 100
+        ]{x^2.807};
+    \addlegendentry{$O(n^2.807  )$}
+    \end{axis}
+\end{tikzpicture}
 
 \subsection{Perhitungan Kompleksitas Tempat}
-duar hayolo
 
+\subsubsection{Kompleksitas Tempat Algoritma Iterative}
+\paragraph*{
+    \emph{Kompleksitas tempat dari algoritma iterative memiliki notasi kompleksitas Big O bernilai O($n^{2}$). 
+    Hal tersebut didapatkan dari variable-variable matrix $n \times n$ yang dipakai oleh algoritma.\\\\}
+}
+
+%iterative
+\begin{tikzpicture}
+    \begin{axis}[
+        title={Iterative algorithm space complexity},
+        xlabel=$n$,
+        ylabel={$Operations$}
+    ]
+    \addplot [
+        domain = 0:10,
+        samples = 100
+        ]{x^2};
+    \addlegendentry{$O(n^2)$}
+    \end{axis}
+\end{tikzpicture}
+
+\subsubsection{Kompleksitas Tempat Algoritma Rekursif}
+\paragraph*{
+    \emph{Kompleksitas tempat dari algoritma rekursif memiliki notasi kompleksitas Big O bernilai O($n^{2}$). 
+    Hal tersebut didapatkan dari variable-variable matrix $n \times n$ yang dipakai oleh algoritma.\\\\}
+}
+
+%iterative
+\begin{tikzpicture}
+    \begin{axis}[
+        title={Recursive algorithm space complexity},
+        xlabel=$n$,
+        ylabel={$Operations$}
+    ]
+    \addplot [
+        domain = 0:10,
+        samples = 100
+        ]{x^2};
+    \addlegendentry{$O(n^2)$}
+    \end{axis}
+\end{tikzpicture}
+
+\subsubsection{Kompleksitas Tempat Algoritma Strassen}
+\paragraph*{
+    \emph{Kompleksitas tempat dari algoritma Strassen memiliki notasi kompleksitas Big O bernilai O($n^{2}$). 
+    Hal tersebut didapatkan dari variable-variable matrix $n \times n$ yang dipakai oleh algoritma.\\\\}
+}
+
+%iterative
+\begin{tikzpicture}
+    \begin{axis}[
+        title={Strassen's algorithm space complexity},
+        xlabel=$n$,
+        ylabel={$Operations$}
+    ]
+    \addplot [
+        domain = 0:10,
+        samples = 100
+        ]{x^2};
+    \addlegendentry{$O(n^2)$}
+    \end{axis}
+\end{tikzpicture}
 \section{Kesimpulan}
 Program berjalan dengan baik ketika dimensi atau ordo matriks berada dibawah ordo 50x50. Saat berada pada ordo diatas 50x50 perhitungan program berjalan akan tetapi tidak dapat menampilkan hasil secara keseluruhan. Kemudian pada ordo diatas 1000x1000 program tidak dapat berjalan.
 
