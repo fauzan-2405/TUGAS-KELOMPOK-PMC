@@ -118,7 +118,7 @@ yang kecil yaitu ukuran 3x3. Selanjutnya dilakukan perhitungan manual perkalian
     \smartdiagram[priority descriptive diagram]{Jika valid, program dikembangkan untuk ukuran besar,Pengamatan kedua hasil,Perhitungan manual,Pembuatan program}
 \end{center}
 
-\section{Pembahasan}
+\section{Implementasi dan Pengujian}
 
 \subsection{Flowchart algoritma program}
 program memiliki flowchart sebagai berikut:
@@ -129,9 +129,149 @@ program memiliki flowchart sebagai berikut:
     \caption{flowchart program perkalian matriks}        
 \end{figure}
 
+\subsection{Implementasi Algoritma Iterative dalam Perkalian Matriks}
+Perkalian matriks pada program C dapat dilakukan menggunakan algortima iterative.
+Prosedur perkalian matriks menggunakan metode ini memerlukan argumen atau masukan 
+berupa \texttt{size} atau ukuran dari matriks, lalu matriks A dan matriks B yang akan
+dicari hasil perkaliannya. Algoritma ini dapat diimplementasikan dalam pseudocode berikut:
+
+\begin{algorithm}
+    \caption{Perkalian Matriks Iterative \texttt{kaliMatriksIterative} }\label{alg:one}
+    \DontPrintSemicolon
+    \KwResult{Mengalikan 2 matriks menggunakan algoritma iterasi}
+    \textbf{procedure} \emph{kaliMatriksIterative(int size, int mat\_A[size][size], int mat\_B[size][size] )}\;
+    \textbf{Initialization:}\;
+    $\texttt{int } hasil[i][j] = 0$\;
+    \textbf{Algorithm:}\;
+    \For{$i < size $}{
+        \For{$j < size$}{
+            \For{$k < size$}{
+                $hasil[i][j] += mat\_A[i][k] * mat\_B[k][j]$\;
+            }
+        }
+    }
+\end{algorithm}
+
+\subsection{Implementasi Algoritma Rekursif dalam Perkalian Matriks}
+Dalam perkalian matriks rekursif, kita akan menerapkan tiga loop iterasi melalui panggilan
+rekursif. Panggilan rekusif pertama dari kaliMatriksRekursif adalah untuk mengulangi k (kolom 1
+atau baris 2). Panggilan rekursif kedua dari kaliMatriksRekursif adalah untuk mengubah kolom.
+Panggilan rekursif ketiga adalah untuk mengubah baris. Berikut pseudocode algoritma rekursif
+pada perkalian matriks:
+
+\begin{algorithm}
+    \caption{Perkalian Matriks Recursive \texttt{kaliMatriksRekursif} }\label{alg:two}
+    \DontPrintSemicolon
+    \KwResult{Mengalikan 2 matriks menggunakan algoritma rekursif}
+    \textbf{procedure} \emph{kaliMatriksRecursive(int size, int mat\_A[size][size], int mat\_B[size][size], int hasil[size][size] )}\;
+    \textbf{Initialization:}\;
+    $ \texttt{int } row1 = size $\;
+    $ \texttt{int } col1 = size $\;
+    $ \texttt{int } row2 = size $\;
+    $ \texttt{int } col2 = size $\;
+    $ \texttt{static int } i, j, k= 0$\;
+    \textbf{Algorithm:}\;
+    \uIf{$i \geq row1$}{
+        $return$\;
+    }
+    \ElseIf{$i < row1 $} {
+        \If{$j < col2$} {
+            \If{$k < col1$} {
+                $hasil[i][j] += mat_A[i][k] * mat_B[k][j]$\;
+                $k++$\;
+                $kaliMatriksRecursive(col1, mat\_A, mat\_B, hasil)$\;
+            }
+            $k=0$\;
+            $j++$\;
+            $kaliMatriksRecursive(col1, mat\_A, mat\_B, hasil)$\;
+        }
+        $j=0$\;
+        $i++$\;
+        $kaliMatriksRecursive(col1, mat\_A, mat\_B, hasil)$\;
+    } 
+\end{algorithm}
+
+\subsection{Implementasi Algoritma Strassen's dalam Perkalian Matriks}
+Algortima Strassens dapat digunakan dalam operasi perkalian matriks.
+Ide yang digunakan oleh algoritma ini adalah membagi matriks A dan matriks B
+menjadi 8 sub-matriks lalu menghitung sub-matriks C dengan operasi yang sudah ditentukan
+pada studi pustaka secara rekursif. Perlu diperhatikan bahwa, algoritma ini hanya bisa 
+digunakan pada matriks berukuran m $\times$ m dengan m merupakan bilangan kelipatan
+pangkat 2. Berikut pseudocode algoritma Strassens pada perkalian matriks:
+
+\begin{algorithm}
+    \caption{Perkalian Matriks Strassen's \texttt{kaliMatriksStrassens}}\label{alg:three}
+    \DontPrintSemicolon
+    \KwResult{Mengalikan 2 matriks menggunakan algoritma Strassens's}
+    \textbf{procedure} \emph{kaliMatriksStrassens(int mat\_A[2][2], int mat\_B[2][2])}\;
+    \textbf{Initialization:}\;
+    $ \texttt{int } i,j $\;
+    $ \texttt{int } hasil[i][j]$\;
+    $ \texttt{int } row1, row2, m3, m4, m5,  $\;
+    \textbf{Algorithm:}\;
+    $row1= (mat_A[0][0] + mat_A[1][1]) * (mat_B[0][0] + mat_B[1][1]) $\;
+    $row2= (mat_A[1][0] + mat_A[1][1]) * mat_B[0][0] $\;
+    $m3= mat_A[0][0] * (mat_B[0][1] - mat_B[1][1]) $\;
+    $m4= mat_A[1][1] * (mat_B[1][0] - mat_B[0][0]) $\;
+    $m5= (mat_A[0][0] + mat_A[0][1]) * mat_B[1][1] $\;\
+    $m6= (mat_A[1][0] - mat_A[0][0]) * (mat_B[0][0]+mat_B[0][1]) $\;
+    $m7= (mat_A[0][1] - mat_A[1][1]) * (mat_B[1][0]+mat_B[1][1]) $\;
+    $ $\;
+    $hasil[0][0] = row1 + m4- m5 + m7$\;
+    $hasil[0][1] = m3 + m5 $\;
+    $hasil[0][1] = m3 + m5 $\;
+    $hasil[1][1] = row1 - row2 + m3 + m6 $\; 
+\end{algorithm}
+
+\subsection{Algoritma Display untuk Menampilkan Matriks}
+Algoritma ini digunakan untuk menampilkan matriks yang akan digunakan pada proses perkalian
+matriks, yaitu matriks A, matriks B, maupun matriks hasil perkalian matriks A dan B. Algoritma ini
+digunakan karena kita akan banyak menampilkan matriks pada layar. Oleh karena itu dibutuhkan suatu
+prosedur untuk menampilkan matriks secara efektif dan efisien. Algoritma ini memiliki pseudocode:
+
+\begin{algorithm}
+    \caption{Display \texttt{display}}\label{alg:four}
+    \DontPrintSemicolon
+    \KwResult{Menampilkan matriks pada layar}
+    \textbf{procedure} \emph{display(int size, int hasil[size][size]}\;
+    \textbf{Initialization:}\;
+    $ \texttt{int } i,j $\;
+    \textbf{Algorithm:}\;
+    \For{$i < size$} {
+        \For{$j < size$} {
+            $print(hasil[i][j])$\;
+            $j++$\;
+        }
+        $i++$\;
+    }
+\end{algorithm}
+
+\subsection{Analisis Penggantian Pengaksesan Matriks}
+Pengaksesan matriks biasanya menggunakan algoritma "For" lalu
+meng-\emph{traverse} elemen matriks satu persatu. Pengakesan matriks biasanya 
+dilakukan pertama kali pada baris, yang secara umum digunakan "i", lalu
+dilanjutkan dengan pengaksesan kolom, yang secara umum digunakan "j". Berikut
+contoh pengaksesan matriks dengan cara di atas menggunakan algoritma display
+yang telah dijelaskan di atas:
+
+Insert gambar euy
+
+Jika kita membalikkan susunan algoritma "For" dalam pengaksesan matriks, di mana
+kita mengakses terlebih dahulu "j" lalu "i", maka akan didapatkan output:
+
+Insert gambar euy
+
+Berdasarkan dua gambar di atas, dapat ditarik kesimpulan bahwa pembalikan variabel
+dalam pengaksesan matriks tidak membuat output yang dihasilkan berubah. Hal ini dikarenakan
+pengulangan "i" dan "j" memiliki batas iterasi yang sama, yaitu "size". Selain itu, iterasi
+yang dilakukan juga sama, yaitu dengan penambahan 1 per iterasi. Oleh karena itu, pembalikan
+variabel ini tidak mengubah output yang dihasilkan.
 
 \subsection{Perhitungan Kompleksitas waktu}
+duar apaan
 
+\subsection{Perhitungan Kompleksitas Tempat}
+duar hayolo
 
 \section{Kesimpulan}
 Program berjalan dengan baik ketika dimensi atau ordo matriks berada dibawah ordo 50x50. Saat berada pada ordo diatas 50x50 perhitungan program berjalan akan tetapi tidak dapat menampilkan hasil secara keseluruhan. Kemudian pada ordo diatas 1000x1000 program tidak dapat berjalan.
